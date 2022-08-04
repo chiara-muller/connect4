@@ -1,0 +1,29 @@
+.game {
+    background-color: rgb(5, 5, 184);
+    width: 840px;
+    height: 720px;
+    margin: auto;
+}
+
+.gameSpace {
+    border-radius: 50%;
+    background-color: white;
+    cursor: pointer;
+    margin: 10px;
+    padding: 0px;
+    height: 100px;
+    width: 100px;
+    float: left;
+}
+
+.redCoin {
+    background-color: red;
+}
+
+.yelCoin {
+    background-color: yellow;
+}
+
+.restart {
+    text-align: center;
+}
