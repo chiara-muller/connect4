@@ -5,7 +5,16 @@
     margin: auto;
 }
 
-.gameSpace {
+.bottom-game {
+    background-color: rgb(5, 5, 184);
+    width: 1150px;
+    height: 25px;
+    margin: auto;
+    border-top-left-radius: 16%;
+    border-top-right-radius: 16%;
+}
+
+.cell {
     border-radius: 50%;
     background-color: white;
     cursor: pointer;
@@ -16,11 +25,11 @@
     float: left;
 }
 
-.redCoin {
+.red-coin {
     background-color: red;
 }
 
-.yelCoin {
+.yel-coin {
     background-color: yellow;
 }
 
