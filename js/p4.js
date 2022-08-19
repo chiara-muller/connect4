@@ -15,7 +15,7 @@ tableau[5][5] = '0'
 
 
 let game = [
-  [' ', ' ', ' ', ' ', ' ', ' ', ' '],
+  [' ', ' ', ' ', ' ', 'x', ' ', ' '],
   [' ', ' ', ' ', ' ', ' ', ' ', ' '],
   [' ', ' ', ' ', ' ', ' ', ' ', ' '],
   [' ', ' ', ' ', ' ', ' ', ' ', ' '],
@@ -34,6 +34,29 @@ function display(game) {
 }
 
 display(game)
+
+function displayHtml(game) {
+    //let divs = document.getElementsByClassName("cell");
+    for (let i = 0; i < 6; i ++) {
+        for (let j = 0; j < 7; j ++) {
+            // i          = index de ligne actuel 
+            // j          = index de colonne actuel 
+            // game[i][j] = valeur de colonne actuelle (' ', 'x', 'o')
+            if (game[i][j] === 'x') {
+                $(`.c-${i}-${j}`).addClass("red-coin")
+            } else if (game[i][j] === 'o') {
+                $(`.c-${i}-${j}`).addClass("yel-coin")
+            }
+        }
+    }   
+} 
+// function displayHtml(game) {
+//     console.log(game)
+
+// }
+$(document).ready(function() {
+  displayHtml(game)
+})
 
 // function insertCoin(game, column) {
 //     for (let i=5; i>=0; i--) {

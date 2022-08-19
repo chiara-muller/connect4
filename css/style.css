@@ -3,16 +3,10 @@
     width: 840px;
     height: 720px;
     margin: auto;
+    margin-top: 100px;
 }
 
-.bottom-game {
-    background-color: rgb(5, 5, 184);
-    width: 1150px;
-    height: 25px;
-    margin: auto;
-    border-top-left-radius: 16%;
-    border-top-right-radius: 16%;
-}
+
 
 .cell {
     border-radius: 50%;
@@ -23,6 +17,7 @@
     height: 100px;
     width: 100px;
     float: left;
+    color: black;
 }
 
 .red-coin {
@@ -36,3 +31,4 @@
 .restart {
     text-align: center;
 }
+
