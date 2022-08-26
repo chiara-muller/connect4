@@ -15,12 +15,12 @@ tableau[5][5] = '0'
 
 
 let game = [
-  [' ', ' ', ' ', ' ', 'x', ' ', ' '],
   [' ', ' ', ' ', ' ', ' ', ' ', ' '],
   [' ', ' ', ' ', ' ', ' ', ' ', ' '],
   [' ', ' ', ' ', ' ', ' ', ' ', ' '],
-  [' ', ' ', 'x', 'x', ' ', ' ', ' '],
-  [' ', 'o', 'o', 'x', 'o', 'o', ' ']
+  [' ', ' ', ' ', ' ', ' ', ' ', ' '],
+  [' ', ' ', ' ', ' ', ' ', ' ', ' '],
+  [' ', ' ', ' ', ' ', ' ', ' ', ' ']
 ]
 
 function display(game) {
@@ -47,27 +47,33 @@ function displayHtml(game) {
             } else if (game[i][j] === 'o') {
                 $(`.c-${i}-${j}`).addClass("yel-coin")
             }
+            // } else if (game[i][j] === ' ') {
+            //     $(`.c-${i}-${j}`).click(insertCoin(game)) 
+            // }
         }
     }   
 } 
-// function displayHtml(game) {
-//     console.log(game)
 
-// }
+
+// $(document).ready(function() {
+//     displayHtml(game)
+//     $(".col-1").on("click", function() {
+//         insertCoin(game, 0);
+//         displayHtml(game)
+//     })
+// })
+
 $(document).ready(function() {
-  displayHtml(game)
-})
+    displayHtml(game)
+    for (let j = 0; j < 7; j ++) {
+        i = j+1;
+        $(`.col-${i}`).on("click", function() {
+            insertCoin(game, j);
+            displayHtml(game)
+        })
+    }
+}) 
 
-// function insertCoin(game, column) {
-//     for (let i=5; i>=0; i--) {
-//         if (game[i][column] == " ") {
-//             game[i][column] = "x";
-//             break;
-//         } 
-//     }
-    
-//     return game
-// }
 
 function insertCoin(game, column) {
     for (let i=5; i>=0; i--) {
@@ -80,8 +86,14 @@ function insertCoin(game, column) {
     return game
 }
 
-//game = insertCoin(game, 3)
-//display(game)
+
+
+
+
+
+insertCoin(game)
+insertCoin(game)
+
 
 function nextCoin(game) {
     const numberOfX = numberOfCoins(game, 'x')
@@ -95,21 +107,6 @@ function nextCoin(game) {
     }
 }
 
-// function numberOfCoins(game, coin) {
-//     let total = {}
-
-//     for (let row of game) {
-//         for (let letter of row) {
-//             if (total[letter]) {
-//                 total[letter] += 1;
-//             } else {
-//                 total[letter] = 1;
-//             }
-//         }
-//     }
-    
-//     return total[coin]
-// }
 
 function numberOfCoins(game, coin) {
     let total = 0
@@ -134,5 +131,43 @@ function numberOfCoins(game, coin) {
 }
 
 numberOfCoins(game, 'o')
+
+// function numberOfCoins(game, coin) {
+//     let total = {}
+
+//     for (let row of game) {
+//         for (let letter of row) {
+//             if (total[letter]) {
+//                 total[letter] += 1;
+//             } else {
+//                 total[letter] = 1;
+//             }
+//         }
+//     }
+    
+//     return total[coin]
+// }
+
+function playGame(game) {
+    displayHtml(game);
+    insertCoin(game);
+}
+
+playGame(game)
+
+
+// function insertCoin(game) {
+//     for (let i=5; i>=0; i--) {
+//         for (let j = 0; j < 7; j ++) {
+//         if (game[i][j] === " ") {
+//             $(`.col-${j}`).on("click", nextCoin(game));
+//             break;
+//         } 
+//     }
+// }
+//     return game
+// }
+
+// insertCoin(game)
 
 
