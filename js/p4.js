@@ -17,10 +17,10 @@ tableau[5][5] = '0'
 let game = [
   [' ', ' ', ' ', ' ', ' ', ' ', ' '],
   [' ', ' ', ' ', ' ', ' ', ' ', ' '],
-  [' ', ' ', ' ', ' ', ' ', ' ', ' '],
-  [' ', ' ', ' ', ' ', ' ', ' ', ' '],
-  [' ', ' ', ' ', ' ', ' ', ' ', ' '],
-  [' ', ' ', ' ', ' ', ' ', ' ', ' ']
+  [' ', ' ', ' ', 'x', ' ', ' ', ' '],
+  [' ', ' ', ' ', 'x', ' ', ' ', ' '],
+  [' ', ' ', ' ', 'x', ' ', ' ', ' '],
+  [' ', ' ', ' ', 'x', ' ', ' ', ' ']
 ]
 
 function display(game) {
@@ -54,27 +54,6 @@ function displayHtml(game) {
     }   
 } 
 
-
-// $(document).ready(function() {
-//     displayHtml(game)
-//     $(".col-1").on("click", function() {
-//         insertCoin(game, 0);
-//         displayHtml(game)
-//     })
-// })
-
-$(document).ready(function() {
-    displayHtml(game)
-    for (let j = 0; j < 7; j ++) {
-        i = j+1;
-        $(`.col-${i}`).on("click", function() {
-            insertCoin(game, j);
-            displayHtml(game)
-        })
-    }
-}) 
-
-
 function insertCoin(game, column) {
     for (let i=5; i>=0; i--) {
         if (game[i][column] == " ") {
@@ -86,14 +65,19 @@ function insertCoin(game, column) {
     return game
 }
 
+// function insertCoin(game) {
+//     for (let i=5; i>=0; i--) {
+//         for (let j = 0; j < 7; j ++) {
+//         if (game[i][j] === " ") {
+//             $(`.col-${j}`).on("click", nextCoin(game));
+//             break;
+//         } 
+//     }
+// }
+//     return game
+// }
 
-
-
-
-
-insertCoin(game)
-insertCoin(game)
-
+// insertCoin(game)
 
 function nextCoin(game) {
     const numberOfX = numberOfCoins(game, 'x')
@@ -148,26 +132,88 @@ numberOfCoins(game, 'o')
 //     return total[coin]
 // }
 
-function playGame(game) {
-    displayHtml(game);
-    insertCoin(game);
-}
 
-playGame(game)
+$(document).ready(function() {
+    displayHtml(game)
+    for (let j = 0; j < 7; j ++) {
+        i = j + 1;
+        $(`.col-${i}`).on("click", function() {
+            insertCoin(game, j);
+            displayHtml(game)
+        })
+    }
+}) 
+
+// $(document).ready(function() {
+//     displayHtml(game)
+//     $(".col-1").on("click", function() {
+//         insertCoin(game, 0);
+//         displayHtml(game)
+//     })
+// })
 
 
-// function insertCoin(game) {
-//     for (let i=5; i>=0; i--) {
-//         for (let j = 0; j < 7; j ++) {
-//         if (game[i][j] === " ") {
-//             $(`.col-${j}`).on("click", nextCoin(game));
-//             break;
-//         } 
+// let horiOk(game) {
+//     let total = 0;
+//     for (let i = 0; i < 7; i ++) {
+//         total += 1
+//         game[i] = total
+//         return total 
 //     }
 // }
-//     return game
-// }
 
-// insertCoin(game)
+// horiOk(game)
+
+function wonHori(game, coin) {
+    for (let i = 0; i < 6; i ++) {
+        let total = 0;
+        for (let j = 0; j < 7; j ++) {
+            if (game[i][j] == coin) {
+                total += 1   
+            } else {
+                total = 0;
+            }
+            console.log(total)
+            if (total == 4)
+              return true
+        }
+    }
+    return false
+    // return "You Win!";
+}
+
+console.log(wonHori(game, "x"))
 
 
+function wonVerti(game, coin) {
+    
+    for (let j = 0; j < 7; j ++) {
+        let total = 0;
+        for (let i = 0; i < 6; i ++) {
+            if (game[i][j] == coin) {
+                total += 1   
+            } else {
+                total = 0;
+            }
+            console.log(total)
+            if (total == 4)
+              return true
+        }
+    }
+    return false
+}
+
+
+console.log(wonVerti(game, "x"))
+
+
+// function horiOK(game) {
+//     const count = countHori(game);
+//     for (let i = 0; i < 6; i ++) {
+//         for (let j = 0; j < 7; j ++) {
+//             if (count === 4) {
+//                 return "You Win!"
+//             }
+//         }
+//     }
+// }   
