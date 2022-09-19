@@ -3,7 +3,7 @@
     width: 840px;
     height: 720px;
     margin: auto;
-    margin-top: 100px;
+    margin-top: 20px;
 }
 
 
@@ -32,3 +32,52 @@
     text-align: center;
 }
 
+.arrow-container {
+    width: 840px;
+    height: 40px;
+    margin: auto;
+    margin-top: 100px;
+    display: flex;
+}
+
+.arrow {
+    border: solid black;
+    border-width: 0 3px 3px 0;
+    padding: 10px;
+    margin: auto;
+    justify-content: space-between;
+}
+
+
+.down {
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+}
+
+.arrow-1 {
+    visibility: hidden;
+}
+
+.arrow-2 {
+    visibility: hidden;
+}
+
+.arrow-3 {
+    visibility: hidden;
+}
+
+.arrow-4 {
+    visibility: hidden;
+}
+
+.arrow-5 {
+    visibility: hidden;
+}
+
+.arrow-6 {
+    visibility: hidden;
+}
+
+.arrow-7 {
+    visibility: hidden;  
+} 

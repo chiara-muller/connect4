@@ -133,6 +133,17 @@ numberOfCoins(game, 'o')
 // }
 
 
+// $(document).ready(function() {
+//     displayHtml(game)
+//     for (let j = 0; j < 7; j ++) {
+//         i = j + 1;
+//         $(`.col-${i}`).on("click", function() {
+//             insertCoin(game, j);
+//             displayHtml(game)
+//         })
+//     }
+// }) 
+
 $(document).ready(function() {
     displayHtml(game)
     for (let j = 0; j < 7; j ++) {
@@ -141,8 +152,75 @@ $(document).ready(function() {
             insertCoin(game, j);
             displayHtml(game)
         })
+    
+        $(".col-1").mouseover(function() {
+            $(".arrow-1").css("visibility", "visible");
+            displayHtml(game)
+        })
+        $(".col-1").mouseout(function() {
+            $(".arrow-1").css("visibility", "hidden");
+            displayHtml(game)
+        })
+
+        $(".col-2").mouseover(function() {
+            $(".arrow-2").css("visibility", "visible");
+            displayHtml(game)
+        })
+        $(".col-2").mouseout(function() {
+            $(".arrow-2").css("visibility", "hidden");
+            displayHtml(game)
+        })
+
+        $(".col-3").mouseover(function() {
+            $(".arrow-3").css("visibility", "visible");
+            displayHtml(game)
+        })
+        $(".col-3").mouseout(function() {
+            $(".arrow-3").css("visibility", "hidden");
+            displayHtml(game)
+        })
+
+        $(".col-4").mouseover(function() {
+            $(".arrow-4").css("visibility", "visible");
+            displayHtml(game)
+        })
+        $(".col-4").mouseout(function() {
+            $(".arrow-4").css("visibility", "hidden");
+            displayHtml(game)
+        })
+
+        $(".col-5").mouseover(function() {
+            $(".arrow-5").css("visibility", "visible");
+            displayHtml(game)
+        })
+        $(".col-5").mouseout(function() {
+            $(".arrow-5").css("visibility", "hidden");
+            displayHtml(game)
+        })
+
+        $(".col-6").mouseover(function() {
+            $(".arrow-6").css("visibility", "visible");
+            displayHtml(game)
+        })
+        $(".col-6").mouseout(function() {
+            $(".arrow-6").css("visibility", "hidden");
+            displayHtml(game)
+        })
+
+        $(".col-7").mouseover(function() {
+            $(".arrow-7").css("visibility", "visible");
+            displayHtml(game)
+        })
+        $(".col-7").mouseout(function() {
+            $(".arrow-7").css("visibility", "hidden");
+            displayHtml(game)
+        })
+
     }
+    
+    
 }) 
+
 
 // $(document).ready(function() {
 //     displayHtml(game)
