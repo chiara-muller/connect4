@@ -81,3 +81,11 @@
 .arrow-7 {
     visibility: hidden;  
 } 
+
+.win {
+    width: 1000px;
+    height: 720px;
+    margin: auto;
+    margin-top: 50px;
+    visibility: hidden;
+}
