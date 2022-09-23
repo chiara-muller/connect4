@@ -57,36 +57,15 @@ function displayHtml(game) {
 // *** Function that will insert a coin everytime we click on a cell ***
 
 function insertCoin(game, column) {
-    const wonRedHori = wonHori(game, "x")
-    const wonYelHori = wonHori(game, "o")
-    const wonRedVerti = wonVerti(game, "x")
-    const wonYelVerti = wonVerti(game, "o")
     for (let i=5; i>=0; i--) {
         if (game[i][column] == " ") {
             game[i][column] = nextCoin(game);
             break;   
-        } 
-        // if (wonRedHori == true || wonYelHori == true || wonRedVerti == true || wonYelVerti == true) {
-        //     break;
-        // }
+        }
     }
     return game
 }
 
-
-// function insertCoin(game) {
-//     for (let i=5; i>=0; i--) {
-//         for (let j = 0; j < 7; j ++) {
-//         if (game[i][j] === " ") {
-//             $(`.col-${j}`).on("click", nextCoin(game));
-//             break;
-//         } 
-//     }
-// }
-//     return game
-// }
-
-// insertCoin(game)
 
 
 // *** function that will count the number of each coin (red and yellow) ***
@@ -98,6 +77,7 @@ function numberOfCoins(game, coin) {
     //     for (let letter of row) {
     //         if (coin == letter) {
     //           total += 1 
+    //           console.log(total)
     //         }
     //     }
     // }
@@ -108,6 +88,7 @@ function numberOfCoins(game, coin) {
         for (let j = 0; j < 7; j ++) {
             if (game[i][j] == coin) {
                 total += 1
+                console.log(total)
             }
         }
     }
@@ -115,7 +96,6 @@ function numberOfCoins(game, coin) {
     return total
 }
 
-numberOfCoins(game, 'o')
 
 
 // *** function that will determine what color should the next coin be ***
@@ -123,7 +103,7 @@ numberOfCoins(game, 'o')
 function nextCoin(game) {
     const numberOfX = numberOfCoins(game, 'x')
     const numberOfO = numberOfCoins(game, 'o')
-    
+
     if (numberOfX < numberOfO) {
         return 'x';
     }
@@ -137,11 +117,16 @@ function nextCoin(game) {
 
 $(document).ready(function() {
     displayHtml(game)
-    displayArrow(game)
+    displayArrow()
+
     for (let j = 0; j < 7; j ++) {
         i = j + 1;
         $(`.col-${i}`).on("click", function() {
             insertCoin(game, j);
+            wonHori(game, 'o');
+            wonHori(game, 'x');
+            wonVerti(game, 'o');
+            wonVerti(game, 'x');
             displayHtml(game)
         })
     }
@@ -150,7 +135,7 @@ $(document).ready(function() {
 
 // *** function that displays an arrow on top of a column when we hover it ***
 
-function displayArrow(game) {
+function displayArrow() {
     for (let j = 0; j < 7; j ++) {
 
         $(".col-1").mouseover(function() {
@@ -213,18 +198,25 @@ function wonHori(game, coin) {
         let total = 0;
         for (let j = 0; j < 7; j ++) {
             if (game[i][j] == coin) {
-                total += 1   
+                total += 1 
             } else {
                 total = 0;
             }
-            if (total == 4)
-              return true
+            if (total == 4 && coin == 'o') {
+                $(".bounce-in-fwd").css({
+                    "visibility": "visible",
+                    "background-color": "yellow"
+                });
+            } else if (total == 4 && coin == 'x') {
+                $(".bounce-in-fwd").css({
+                    "visibility": "visible",
+                    "background-color": "red"
+                });
+            }
         }
     }
     return false
 }
-
-wonHori(game, "x")
 
 
 // *** function that tells us when a vertical win is reached ***
@@ -239,10 +231,10 @@ function wonVerti(game, coin) {
             } else {
                 total = 0;
             }
-            if (total == 4)
-              return true
+            if (total == 4) {
+            $(".win").css("visibility", "visible");
+            }
         }
     }
     return false
 }
-
