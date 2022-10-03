@@ -132,6 +132,10 @@ $(document).ready(function() {
     }
 }) 
 
+$( window ).on( "load", function() {
+    console.log( "window loaded" );
+});
+
 
 // *** function that displays an arrow on top of a column when we hover it ***
 
@@ -207,6 +211,28 @@ function wonHori(game, coin) {
                     "visibility": "visible",
                     "background-color": "yellow"
                 });
+                $(".restart").removeClass("bounce-in-fwd");
+                $(".restart")[0].offsetWidth;                // MAGIC to restart animation => https://css-tricks.com/restart-css-animation/
+                $(".restart").addClass("bounce-in-fwd");
+
+                // $.keyframe.define([{
+                //     name: "bounce-in-fwd",
+                //     "0%": {
+                //         "-webkit-transform": "scale(0)",
+                //             "transform": "scale(0)",
+                //         "-webkit-animation-timing-function": "ease-in",
+                //             "animation-timing-function": "ease-in",
+                //         "opacity": "0",
+                //     },
+                //     "38%": {
+                //         "-webkit-transform": "scale(1)",
+                //                 "transform": "scale(1)",
+                //         "-webkit-animation-timing-function": "ease-out",
+                //             "animation-timing-function": "ease-out",
+                //         "opacity": "1",
+                //     },
+
+                // }])
             } else if (total == 4 && coin == 'x') {
                 $(".bounce-in-fwd").css({
                     "visibility": "visible",
