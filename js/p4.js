@@ -116,25 +116,45 @@ function nextCoin(game) {
 // *** function that will be link between the HTML/CSS and the JS ***
 
 $(document).ready(function() {
+    let isWon = false;
+
     displayHtml(game)
     displayArrow()
 
     for (let j = 0; j < 7; j ++) {
         i = j + 1;
         $(`.col-${i}`).on("click", function() {
-            insertCoin(game, j);
-            wonHori(game, 'o');
-            wonHori(game, 'x');
-            wonVerti(game, 'o');
-            wonVerti(game, 'x');
+            if (!isWon) {
+                insertCoin(game, j);
+
+                if (won(game, 'o')) {
+                    isWon = true;
+
+                    $(".bounce-in-fwd").css({
+                        "visibility": "visible",
+                        "background-color": "yellow"
+                    });
+                }
+                else if (won(game, 'x')) {
+                    isWon = true;
+
+                    $(".bounce-in-fwd").css({
+                        "visibility": "visible",
+                        "background-color": "red"
+                    });
+                }
+
+                if (isWon) {
+                    $(".restart").removeClass("bounce-in-fwd");
+                    $(".restart")[0].offsetWidth;                // MAGIC to restart animation => https://css-tricks.com/restart-css-animation/
+                    $(".restart").addClass("bounce-in-fwd");
+                }
+            }
+
             displayHtml(game)
         })
     }
 }) 
-
-$( window ).on( "load", function() {
-    console.log( "window loaded" );
-});
 
 
 // *** function that displays an arrow on top of a column when we hover it ***
@@ -194,6 +214,10 @@ function displayArrow() {
     }
 }
 
+function won(game, coin) {
+    return wonHori(game, coin) || wonVerti(game, coin)
+}
+
 
 // *** function that tells us when an horizontal win is reached ***
 
@@ -206,41 +230,12 @@ function wonHori(game, coin) {
             } else {
                 total = 0;
             }
-            if (total == 4 && coin == 'o') {
-                $(".bounce-in-fwd").css({
-                    "visibility": "visible",
-                    "background-color": "yellow"
-                });
-                $(".restart").removeClass("bounce-in-fwd");
-                $(".restart")[0].offsetWidth;                // MAGIC to restart animation => https://css-tricks.com/restart-css-animation/
-                $(".restart").addClass("bounce-in-fwd");
 
-                // $.keyframe.define([{
-                //     name: "bounce-in-fwd",
-                //     "0%": {
-                //         "-webkit-transform": "scale(0)",
-                //             "transform": "scale(0)",
-                //         "-webkit-animation-timing-function": "ease-in",
-                //             "animation-timing-function": "ease-in",
-                //         "opacity": "0",
-                //     },
-                //     "38%": {
-                //         "-webkit-transform": "scale(1)",
-                //                 "transform": "scale(1)",
-                //         "-webkit-animation-timing-function": "ease-out",
-                //             "animation-timing-function": "ease-out",
-                //         "opacity": "1",
-                //     },
-
-                // }])
-            } else if (total == 4 && coin == 'x') {
-                $(".bounce-in-fwd").css({
-                    "visibility": "visible",
-                    "background-color": "red"
-                });
-            }
+            if (total == 4)
+                return true;
         }
     }
+
     return false
 }
 
@@ -257,10 +252,10 @@ function wonVerti(game, coin) {
             } else {
                 total = 0;
             }
-            if (total == 4) {
-            $(".win").css("visibility", "visible");
-            }
+            if (total == 4) 
+                return true;
         }
     }
+
     return false
 }
