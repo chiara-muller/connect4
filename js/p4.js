@@ -48,9 +48,18 @@ function displayHtml(game) {
                 $(`.c-${i}-${j}`).addClass("red-coin")
             } else if (game[i][j] === 'o') {
                 $(`.c-${i}-${j}`).addClass("yel-coin")
+            } else {
+                $(`.c-${i}-${j}`).removeClass("yel-coin")
+                $(`.c-${i}-${j}`).removeClass("red-coin")
             }
         }
-    }   
+    }
+
+    if (nextCoin(game) == 'x') {
+        $('.arrow').css('borderColor', 'red')
+    } else {
+        $('.arrow').css('borderColor', 'yellow')
+    }
 } 
 
 
@@ -119,8 +128,8 @@ $(document).ready(function() {
     let isWon = false;
 
     displayHtml(game)
-    displayArrow()
-
+    bindArrow()
+    bindTryAgain(game)
     for (let j = 0; j < 7; j ++) {
         i = j + 1;
         $(`.col-${i}`).on("click", function() {
@@ -159,58 +168,15 @@ $(document).ready(function() {
 
 // *** function that displays an arrow on top of a column when we hover it ***
 
-function displayArrow() {
+function bindArrow() {
     for (let j = 0; j < 7; j ++) {
 
-        $(".col-1").mouseover(function() {
-            $(".arrow-1").css("visibility", "visible");
+        $(`.col-${j + 1}`).mouseover(function() {
+            $(`.arrow-${j + 1}`).css("visibility", "visible");
         })
-        $(".col-1").mouseout(function() {
-            $(".arrow-1").css("visibility", "hidden");
+        $(`.col-${j + 1}`).mouseout(function() {
+            $(`.arrow-${j + 1}`).css("visibility", "hidden");
         })
-
-        $(".col-2").mouseover(function() {
-            $(".arrow-2").css("visibility", "visible");
-        })
-        $(".col-2").mouseout(function() {
-            $(".arrow-2").css("visibility", "hidden");
-        })
-
-        $(".col-3").mouseover(function() {
-            $(".arrow-3").css("visibility", "visible");
-        })
-        $(".col-3").mouseout(function() {
-            $(".arrow-3").css("visibility", "hidden");
-        })
-
-        $(".col-4").mouseover(function() {
-            $(".arrow-4").css("visibility", "visible");
-        })
-        $(".col-4").mouseout(function() {
-            $(".arrow-4").css("visibility", "hidden");
-        })
-
-        $(".col-5").mouseover(function() {
-            $(".arrow-5").css("visibility", "visible");
-        })
-        $(".col-5").mouseout(function() {
-            $(".arrow-5").css("visibility", "hidden");
-        })
-
-        $(".col-6").mouseover(function() {
-            $(".arrow-6").css("visibility", "visible");
-        })
-        $(".col-6").mouseout(function() {
-            $(".arrow-6").css("visibility", "hidden");
-        })
-
-        $(".col-7").mouseover(function() {
-            $(".arrow-7").css("visibility", "visible");
-        })
-        $(".col-7").mouseout(function() {
-            $(".arrow-7").css("visibility", "hidden");
-        })
-
     }
 }
 
@@ -258,4 +224,23 @@ function wonVerti(game, coin) {
     }
 
     return false
+}
+
+
+function bindTryAgain(game) {
+    $(".try-again").on("click", function() {
+        emptyGame(game)
+        isWon = false
+    })
+}
+
+function emptyGame(game) {
+    console.log("youhou")
+    for (let i = 0; i < 6; i ++) {
+        for (let j = 0; j < 7; j ++) {
+            game[i][j] = ' '
+        }    
+    }
+
+    displayHtml(game)
 }

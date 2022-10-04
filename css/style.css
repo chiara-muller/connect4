@@ -217,13 +217,16 @@
             right: 0;
             bottom: 0;
             margin: auto;
-            background-color: black;
-            color: white;
+            background-color: red;
+            color: black;
 }
 
 .winner {
+    font-family: "Lucida Console", "Courier New", monospace;
+    font-size: 50px;
     text-align: center;
-    padding-top: 18%;
+    padding-top: 40%;
+
 }
 
 
