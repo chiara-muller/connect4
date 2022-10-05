@@ -56,9 +56,9 @@ function displayHtml(game) {
     }
 
     if (nextCoin(game) == 'x') {
-        $('.arrow').css('borderColor', 'red')
+        $('.arrow').css('borderColor', 'rgb(245, 20, 9)')
     } else {
-        $('.arrow').css('borderColor', 'yellow')
+        $('.arrow').css('borderColor', 'rgb(249, 220, 5)')
     }
 } 
 
@@ -125,11 +125,16 @@ function nextCoin(game) {
 // *** function that will be link between the HTML/CSS and the JS ***
 
 $(document).ready(function() {
-    let isWon = false;
 
     displayHtml(game)
     bindArrow()
     bindTryAgain(game)
+    play(game)
+}) 
+
+
+function play(game) {
+    let isWon = false;
     for (let j = 0; j < 7; j ++) {
         i = j + 1;
         $(`.col-${i}`).on("click", function() {
@@ -141,7 +146,7 @@ $(document).ready(function() {
 
                     $(".bounce-in-fwd").css({
                         "visibility": "visible",
-                        "background-color": "yellow"
+                        "background-color": "rgb(249, 220, 5)"
                     });
                 }
                 else if (won(game, 'x')) {
@@ -149,7 +154,7 @@ $(document).ready(function() {
 
                     $(".bounce-in-fwd").css({
                         "visibility": "visible",
-                        "background-color": "red"
+                        "background-color": "rgb(245, 20, 9)"
                     });
                 }
 
@@ -163,7 +168,7 @@ $(document).ready(function() {
             displayHtml(game)
         })
     }
-}) 
+}
 
 
 // *** function that displays an arrow on top of a column when we hover it ***
@@ -231,6 +236,7 @@ function bindTryAgain(game) {
     $(".try-again").on("click", function() {
         emptyGame(game)
         isWon = false
+        play(game)
     })
 }
 
@@ -239,6 +245,7 @@ function emptyGame(game) {
     for (let i = 0; i < 6; i ++) {
         for (let j = 0; j < 7; j ++) {
             game[i][j] = ' '
+            $(".bounce-in-fwd").css("visibility", "hidden")
         }    
     }
 

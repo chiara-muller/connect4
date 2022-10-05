@@ -1,10 +1,11 @@
 .game {
-    background-color: rgb(5, 5, 184);
+    background-color: rgb(16, 40, 241);
     width: 840px;
     height: 720px;
     margin: auto;
     margin-top: 20px;
     position: relative;
+
 }
 
 
@@ -19,14 +20,15 @@
     width: 100px;
     float: left;
     color: black;
+    box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
 }
 
 .red-coin {
-    background-color: red;
+    background-color: rgb(245, 20, 9);
 }
 
 .yel-coin {
-    background-color: rgb(255, 255, 0);
+    background-color: rgb(249, 220, 5);
 }
 
 .restart {
@@ -217,8 +219,9 @@
             right: 0;
             bottom: 0;
             margin: auto;
-            background-color: red;
+            background-color: rgb(245, 20, 9);
             color: black;
+            box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
 }
 
 .winner {
@@ -229,4 +232,10 @@
 
 }
 
+.try-again {
+    font-family: "Lucida Console", "Courier New", monospace;
+    font-size: medium;
+    background-color: black;
+    color: white;
+}
 
