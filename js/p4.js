@@ -186,7 +186,7 @@ function bindArrow() {
 }
 
 function won(game, coin) {
-    return wonHori(game, coin) || wonVerti(game, coin)
+    return wonHori(game, coin) || wonVerti(game, coin) || wonDiago1(game, coin) || wonDiago2(game, coin)
 }
 
 
@@ -241,7 +241,6 @@ function bindTryAgain(game) {
 }
 
 function emptyGame(game) {
-    console.log("youhou")
     for (let i = 0; i < 6; i ++) {
         for (let j = 0; j < 7; j ++) {
             game[i][j] = ' '
@@ -250,4 +249,41 @@ function emptyGame(game) {
     }
 
     displayHtml(game)
+}
+
+function wonDiago1(game, coin) {
+    for (let i = 3; i < 6; i ++) {
+        let total = 0;
+        for (let j = 0; j < 7; j ++) {
+            if (game[i][j] == coin && game[i-1][j+1] == coin && game[i-2][j+2] == coin && game[i-3][j+3] == coin) {
+                total += 4   
+            } else {
+                total = 0;
+            }
+            if (total == 4) 
+                return true;
+        }
+     }
+
+    return false
+}
+
+
+function wonDiago2(game, coin) {
+    for (let i = 3; i < 6; i ++) {
+        let total = 0;
+        for (let j = 6; j >= 0; j --) {
+            if (game[i][j] == coin && game[i-1][j-1] == coin && game[i-2][j-2] == coin && game[i-3][j-3] == coin) {
+                // console.log(game[i-1][j+1])
+                // console.log(game[i][j])
+                total += 4   
+            } else {
+                total = 0;
+            }
+            if (total == 4) 
+                return true;
+        }
+     }
+
+    return false
 }
