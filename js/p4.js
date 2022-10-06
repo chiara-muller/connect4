@@ -23,7 +23,7 @@ let game = [
   [' ', ' ', ' ', ' ', ' ', ' ', ' ']
 ]
 
-// *** Function that will display the game variable in the console ***
+// *** function to display the game variable in the console ***
 
 function display(game) {
     console.log("---------");
@@ -36,7 +36,7 @@ function display(game) {
 display(game)
 
 
-// *** Function that will display the html instead of the display function above ***
+// *** function that gives a visual out of the console ***
 
 function displayHtml(game) {
     for (let i = 0; i < 6; i ++) {
@@ -63,18 +63,19 @@ function displayHtml(game) {
 } 
 
 
-// *** Function that will insert a coin everytime we click on a cell ***
+// *** function that binds an arrow on top of a column when we hover it ***
 
-function insertCoin(game, column) {
-    for (let i=5; i>=0; i--) {
-        if (game[i][column] == " ") {
-            game[i][column] = nextCoin(game);
-            break;   
-        }
+function bindArrow() {
+    for (let j = 0; j < 7; j ++) {
+
+        $(`.col-${j + 1}`).mouseover(function() {
+            $(`.arrow-${j + 1}`).css("visibility", "visible");
+        })
+        $(`.col-${j + 1}`).mouseout(function() {
+            $(`.arrow-${j + 1}`).css("visibility", "hidden");
+        })
     }
-    return game
 }
-
 
 
 // *** function that will count the number of each coin (red and yellow) ***
@@ -106,8 +107,7 @@ function numberOfCoins(game, coin) {
 }
 
 
-
-// *** function that will determine what color should the next coin be ***
+// *** function that tells what will be the color of the next coin ***
 
 function nextCoin(game) {
     const numberOfX = numberOfCoins(game, 'x')
@@ -122,16 +122,20 @@ function nextCoin(game) {
 }
 
 
-// *** function that will be link between the HTML/CSS and the JS ***
+// *** Function that will insert a coin ***
 
-$(document).ready(function() {
+function insertCoin(game, column) {
+    for (let i=5; i>=0; i--) {
+        if (game[i][column] == " ") {
+            game[i][column] = nextCoin(game);
+            break;   
+        }
+    }
+    return game
+}
 
-    displayHtml(game)
-    bindArrow()
-    bindTryAgain(game)
-    play(game)
-}) 
 
+// *** function to play by clicking on the cells ***
 
 function play(game) {
     let isWon = false;
@@ -171,26 +175,7 @@ function play(game) {
 }
 
 
-// *** function that displays an arrow on top of a column when we hover it ***
-
-function bindArrow() {
-    for (let j = 0; j < 7; j ++) {
-
-        $(`.col-${j + 1}`).mouseover(function() {
-            $(`.arrow-${j + 1}`).css("visibility", "visible");
-        })
-        $(`.col-${j + 1}`).mouseout(function() {
-            $(`.arrow-${j + 1}`).css("visibility", "hidden");
-        })
-    }
-}
-
-function won(game, coin) {
-    return wonHori(game, coin) || wonVerti(game, coin) || wonDiago1(game, coin) || wonDiago2(game, coin)
-}
-
-
-// *** function that tells us when an horizontal win is reached ***
+// *** function for an horizontal win ***
 
 function wonHori(game, coin) {
     for (let i = 0; i < 6; i ++) {
@@ -211,7 +196,7 @@ function wonHori(game, coin) {
 }
 
 
-// *** function that tells us when a vertical win is reached ***
+// *** function for a vertical win ***
 
 function wonVerti(game, coin) {
     
@@ -232,24 +217,7 @@ function wonVerti(game, coin) {
 }
 
 
-function bindTryAgain(game) {
-    $(".try-again").on("click", function() {
-        emptyGame(game)
-        isWon = false
-        play(game)
-    })
-}
-
-function emptyGame(game) {
-    for (let i = 0; i < 6; i ++) {
-        for (let j = 0; j < 7; j ++) {
-            game[i][j] = ' '
-            $(".bounce-in-fwd").css("visibility", "hidden")
-        }    
-    }
-
-    displayHtml(game)
-}
+// *** function for a diagonal ascending win ***
 
 function wonDiago1(game, coin) {
     for (let i = 3; i < 6; i ++) {
@@ -269,13 +237,13 @@ function wonDiago1(game, coin) {
 }
 
 
+// *** function for a diagonal descending win ***
+
 function wonDiago2(game, coin) {
     for (let i = 3; i < 6; i ++) {
         let total = 0;
         for (let j = 6; j >= 0; j --) {
             if (game[i][j] == coin && game[i-1][j-1] == coin && game[i-2][j-2] == coin && game[i-3][j-3] == coin) {
-                // console.log(game[i-1][j+1])
-                // console.log(game[i][j])
                 total += 4   
             } else {
                 total = 0;
@@ -287,3 +255,65 @@ function wonDiago2(game, coin) {
 
     return false
 }
+
+
+// *** function to regroup the different wins ***
+
+function won(game, coin) {
+    return wonHori(game, coin) || wonVerti(game, coin) || wonDiago1(game, coin) || wonDiago2(game, coin)
+}
+
+
+// *** function to clear the game ***
+
+function emptyGame(game) {
+    for (let i = 0; i < 6; i ++) {
+        for (let j = 0; j < 7; j ++) {
+            game[i][j] = ' '
+            $(".bounce-in-fwd").css("visibility", "hidden")
+        }    
+    }
+
+    displayHtml(game)
+}
+
+
+// *** function to try again after a win by cliking on the Try Again button ***
+
+function bindTryAgain(game) {
+    $(".try-again").on("click", function() {
+        emptyGame(game)
+        isWon = false
+        play(game)
+    })
+}
+
+
+// *** function that will be link between the HTML/CSS and the JS ***
+
+$(document).ready(function() {
+
+    displayHtml(game)
+    bindArrow()
+    bindTryAgain(game)
+    play(game)
+    
+}) 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

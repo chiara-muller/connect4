@@ -9,7 +9,6 @@
 }
 
 
-
 .cell {
     border-radius: 50%;
     background-color: white;
@@ -31,9 +30,11 @@
     background-color: rgb(249, 220, 5);
 }
 
+
 .restart {
     text-align: center;
 }
+
 
 .arrow-container {
     width: 840px;
@@ -42,6 +43,7 @@
     margin-top: 100px;
     display: flex;
 }
+
 
 .arrow {
     border: solid black;
@@ -56,6 +58,7 @@
     transform: rotate(45deg);
     -webkit-transform: rotate(45deg);
 }
+
 
 .arrow-1 {
     visibility: hidden;
@@ -98,6 +101,7 @@
  * animation bounce-in-fwd
  * ----------------------------------------
  */
+
  @-webkit-keyframes bounce-in-fwd {
     0% {
       -webkit-transform: scale(0);
@@ -224,6 +228,7 @@
             box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
 }
 
+
 .winner {
     font-family: "Lucida Console", "Courier New", monospace;
     font-size: 50px;
@@ -231,6 +236,7 @@
     padding-top: 40%;
 
 }
+
 
 .try-again {
     font-family: "Lucida Console", "Courier New", monospace;
